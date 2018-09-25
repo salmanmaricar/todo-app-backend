@@ -8,7 +8,7 @@ const app: express.Application = express();
 app.get('/', (req: Request, res: Response) => {
   const user = new User('John');
 
-  res.send(`Hello ${user.name}!`);
+  res.send(`Hello ${user.name}, ${user.getInitials()}`);
 });
 
 const port = process.env.PORT || 3000;

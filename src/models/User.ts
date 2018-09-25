@@ -12,4 +12,8 @@ export class User {
   set name(value: string) {
     this._name = value;
   }
+
+  public getInitials(): string {
+    return this.name.charAt(0);
+  }
 }
