@@ -1,10 +1,10 @@
 import { config } from 'dotenv';
-import express, { Request, Response } from 'express';
+import express, { Application, Request, Response } from 'express';
 import { User } from './models/User/User';
 
 config();
 
-const app: express.Application = express();
+const app: Application = express();
 
 app.get('/', (req: Request, res: Response) => {
   const user = new User('John');
