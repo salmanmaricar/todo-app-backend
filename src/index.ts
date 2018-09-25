@@ -1,7 +1,8 @@
-import express, {Request, Response} from "express";
-import { User } from './models/User';
+import { config } from 'dotenv';
+import express, { Request, Response } from 'express';
+import { User } from './models/User/User';
 
-require('dotenv').config();
+config();
 
 const app: express.Application = express();
 
