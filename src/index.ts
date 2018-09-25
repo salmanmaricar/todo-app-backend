@@ -1,10 +1,14 @@
-require('dotenv').config();
-import express = require("express");
+import express from "express";
+import { User } from './models/User';
 
-const app = express();
+require('dotenv').config();
+
+const app: express.Application = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello world!');
+  const user = new User('John');
+
+  res.send(`Hello ${user.name}!`);
 });
 
 const port = process.env.PORT || 3000;
