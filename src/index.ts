@@ -1,11 +1,11 @@
-import express from "express";
+import express, {Request, Response} from "express";
 import { User } from './models/User';
 
 require('dotenv').config();
 
 const app: express.Application = express();
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   const user = new User('John');
 
   res.send(`Hello ${user.name}!`);
