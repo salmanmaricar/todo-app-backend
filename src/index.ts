@@ -1,10 +1,16 @@
 import { config } from 'dotenv';
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import { User } from './models/User/User';
 
 config();
 
 const app: Application = express();
+
+// register middleware that logs out req headers of all requests
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(req.headers);
+  next();
+});
 
 app.get('/', (req: Request, res: Response) => {
   const user = new User('John');
