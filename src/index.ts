@@ -1,6 +1,8 @@
 import { config } from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
-import { User } from './models/User/User';
+import { TodoItem } from './models/TodoItem/TodoItem';
+
+import bodyParser from 'body-parser';
 
 config();
 
@@ -11,18 +13,22 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(req.headers);
   next();
 });
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded
 
-app.get('/', (req: Request, res: Response) => {
-  const user = new User('John');
+app.get('/todos', (req: Request, res: Response) => {
+  const item1 = new TodoItem('Item 1', '16 Sep 2019');
+  const item2 = new TodoItem('Item 2', '20 Sep 2019');
 
-  res.send(`Hello ${user.name}, ${user.getInitials()}`);
+  res.send([item1, item2]);
 });
 
-app.get('/users', (req: Request, res: Response) => {
-  const user1 = new User('John');
-  const user2 = new User('John');
+app.post('/create', (req: Request, res: Response) => {
+  const itemName = req.body.itemName;
+  const itemDueDate = req.body.itemDueDate;
 
-  res.send([user1, user2]);
+  console.log(req.body);
+  res.send(req.body);
 });
 
 const port = process.env.PORT || 3001;
